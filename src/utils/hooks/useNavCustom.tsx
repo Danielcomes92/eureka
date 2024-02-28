@@ -3,13 +3,13 @@ import {useNavigation} from '@react-navigation/native';
 const useNavCustom = () => {
   const navigation = useNavigation();
 
-  const handleNavigation = (route: string) => {
+  const handleNavigation = (route: string, params?: any) => {
     // @ts-ignore
-    return navigation.navigate(route);
+    return navigation.navigate(route, params);
   };
 
-  const handleBack = (route?: string) => {
-    return route ? handleNavigation(route) : navigation.goBack();
+  const handleBack = (route?: string, params?: any) => {
+    return route ? handleNavigation(route, {params}) : navigation.goBack();
   };
 
   return {
