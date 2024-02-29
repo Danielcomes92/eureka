@@ -25,14 +25,17 @@ const MainScreen = () => {
 
   const fetchPhotos = useCallback(async () => {
     try {
-      const imagesAux = [];
+      const imagesAux: {id: string; uri: string}[] = [];
       const response = await CameraRoll.getPhotos({
         assetType: 'Photos',
         first: 10,
       });
       response.edges.forEach(edge => {
         if (edge.node.group_name[0] === 'piktapp') {
-          imagesAux.push({id: edge.node.id, uri: edge.node.image.uri});
+          imagesAux.push({
+            id: edge.node.id,
+            uri: edge.node.image.uri,
+          });
         }
       });
       setImagesFromLibrary(imagesAux);
@@ -42,7 +45,7 @@ const MainScreen = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const removeImageHandler = async (item: any) => {
+  const removeImageHandler = async (item: {uri: string; id: any}) => {
     try {
       await CameraRoll.deletePhotos([item.uri]);
       removeImage(item.id);
@@ -77,13 +80,17 @@ const MainScreen = () => {
             keyExtractor={item => item.id}
             renderItem={({item}) => (
               <View style={{alignItems: 'center'}}>
-                <Image source={{uri: item.uri}} style={styles.image} />
+                <Pressable
+                  style={({pressed}) => [{opacity: pressed ? 0.75 : 1}]}
+                  onPress={() =>
+                    handleNavigation(NAVIGATION_SCREENS.PICTURE, item)
+                  }>
+                  <Image source={{uri: item.uri}} style={styles.image} />
+                </Pressable>
                 <Pressable
                   style={({pressed}) => [
-                    {
-                      opacity: pressed ? 0.75 : 1,
-                      ...styles.button,
-                    },
+                    {opacity: pressed ? 0.75 : 1},
+                    styles.button,
                   ]}
                   onPress={() => removeImageHandler(item)}>
                   <Text style={styles.buttonText}>Delete image</Text>
@@ -108,10 +115,8 @@ const MainScreen = () => {
             </Text>
             <Pressable
               style={({pressed}) => [
-                {
-                  opacity: pressed ? 0.75 : 1,
-                  ...styles.button,
-                },
+                {opacity: pressed ? 0.75 : 1},
+                styles.button,
               ]}
               onPress={handlePermissionDenied}>
               <Text style={styles.buttonText}>Open Settings</Text>
@@ -120,12 +125,15 @@ const MainScreen = () => {
         ) : (
           <Pressable
             style={({pressed}) => [
-              {
-                opacity: pressed ? 0.75 : 1,
-                ...styles.button,
-              },
+              {opacity: pressed ? 0.75 : 1},
+              styles.button,
             ]}
-            onPress={() => handleNavigation(NAVIGATION_SCREENS.TAKE_PICTURE)}>
+            onPress={() =>
+              handleNavigation(
+                NAVIGATION_SCREENS.TAKE_PICTURE,
+                images.length ? 'Take more pictures' : 'Take a picture',
+              )
+            }>
             <Text style={styles.buttonText}>
               {images.length ? 'Take more pictures' : 'Take a picture'}
             </Text>

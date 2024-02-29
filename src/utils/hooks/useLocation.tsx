@@ -30,7 +30,7 @@ const useLocation = () => {
           console.warn(err);
         }
       } else if (Platform.OS === 'ios') {
-        setHasPermission(true); // On iOS, assume permission is granted
+        setHasPermission(true);
         startLocationUpdates();
       }
     };

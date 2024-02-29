@@ -7,9 +7,11 @@ const App = () => {
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setShowSplash(false);
     }, 2400);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (

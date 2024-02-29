@@ -1,115 +1,39 @@
-import React, {useCallback} from 'react';
-import {View, Text, StyleSheet, Pressable, Image, Linking} from 'react-native';
-import useNavCustom from '../../../utils/hooks/useNavCustom';
-import NAVIGATION_SCREENS from '../../../constants/routes';
+import React, {useEffect, useState} from 'react';
+import {View, Text, StyleSheet, Image} from 'react-native';
 import {useRoute} from '@react-navigation/native';
-import {CameraRoll} from '@react-native-camera-roll/camera-roll';
-import {useImagesStore} from '../../../store/images';
-import useLocation from '../../../utils/hooks/useLocation';
-import {useLocationStore} from '../../../store/location';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const PictureScreen = () => {
-  const {handleBack} = useNavCustom();
   const params = useRoute();
-  const {hasPermission} = useLocation();
-  const setImagesFromLibrary = useImagesStore(
-    state => state.setImagesFromLibrary,
-  );
-  const location = useLocationStore(state => state.location);
+  const [imageLocation, setImageLocation] = useState<string | null>(null);
 
-  const saveImageHandler = async () => {
-    try {
-      await CameraRoll.save(`file://${params?.params?.path}`, {
-        type: 'photo',
-        album: 'piktapp',
-      });
-      fetchPhotos();
-    } catch (error) {
-      console.log('error saving photo...'); //ToDo
-    }
-  };
+  useEffect(() => {
+    const getData = async (key: string) => {
+      try {
+        const value = await AsyncStorage.getItem(key);
+        setImageLocation(value);
+      } catch (error) {
+        console.log('Error reading stored data:', error);
+      }
+    };
 
-  const fetchPhotos = useCallback(async () => {
-    try {
-      const imagesAux: {id: string; uri: string}[] = [];
-      const response = await CameraRoll.getPhotos({
-        assetType: 'Photos',
-        first: 10,
-      });
-      response.edges.forEach(edge => {
-        if (edge.node.group_name[0] === 'piktapp') {
-          imagesAux.push({id: edge.node.id, uri: edge.node.image.uri});
-        }
-      });
-      setImagesFromLibrary(imagesAux);
-      handleBack(NAVIGATION_SCREENS.MAIN);
-    } catch (error) {
-      console.log('Error loading images:', error);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const handlePermissionDenied = () => {
-    Linking.openSettings();
-  };
+    getData(params?.params.id);
+  }, [params]);
 
   return (
     <View style={styles.container}>
       <View style={styles.topContentContainer}>
         <Image
-          source={{uri: params?.params?.path}}
+          source={{uri: params?.params?.uri}}
           resizeMode="contain"
           resizeMethod="auto"
-          style={{width: '100%', height: '100%'}}
+          style={styles.image}
         />
-        {location && <Text>{location}</Text>}
-      </View>
-
-      <View style={styles.buttonContainer}>
-        {hasPermission ? (
-          <>
-            <Pressable
-              style={({pressed}) => [
-                {
-                  opacity: pressed ? 0.75 : 1,
-                  ...styles.button,
-                },
-              ]}
-              onPress={() => handleBack(NAVIGATION_SCREENS.MAIN)}>
-              <Text style={styles.buttonText}>Go back</Text>
-            </Pressable>
-            <Pressable
-              style={({pressed}) => [
-                {
-                  opacity: pressed ? 0.75 : 1,
-                  ...styles.button,
-                },
-              ]}
-              onPress={saveImageHandler}>
-              <Text style={styles.buttonText}>Save photo</Text>
-            </Pressable>
-            <Pressable
-              style={({pressed}) => [
-                {
-                  opacity: pressed ? 0.75 : 1,
-                  ...styles.button,
-                },
-              ]}
-              onPress={() => handleBack()}>
-              <Text style={styles.buttonText}>Re take photo</Text>
-            </Pressable>
-          </>
-        ) : (
-          <Pressable
-            style={({pressed}) => [
-              {
-                opacity: pressed ? 0.75 : 1,
-                ...styles.button,
-              },
-            ]}
-            onPress={handlePermissionDenied}>
-            <Text style={styles.buttonText}>Open settings</Text>
-          </Pressable>
+        {imageLocation && (
+          <View style={styles.locationTextContainer}>
+            <Text style={styles.locationText}>Location:</Text>
+            <Text style={styles.locationTextB}>{imageLocation}</Text>
+          </View>
         )}
       </View>
     </View>
@@ -126,20 +50,22 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 600,
   },
-  buttonContainer: {
-    marginTop: 30,
-    position: 'absolute',
-    bottom: 50,
-    alignItems: 'center',
+  image: {
+    width: '100%',
+    height: '100%',
   },
-  button: {
-    padding: 16,
-    backgroundColor: 'black',
-    borderRadius: 4,
-    marginVertical: 12,
+  locationText: {
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
-  buttonText: {
-    color: 'white',
+  locationTextB: {
+    fontSize: 18,
+  },
+  locationTextContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginVertical: 4,
   },
 });
 

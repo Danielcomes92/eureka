@@ -15,12 +15,12 @@ const AppNavigator = () => {
         options={{title: 'PiktApp'}}
       />
       <Stack.Screen
-        options={{headerShown: false}}
+        options={{title: 'The lab', headerBackTitleVisible: false}}
         name="TakePicture"
         component={TakePictureScreen}
       />
       <Stack.Screen
-        options={{headerShown: false, gestureEnabled: false}}
+        options={{title: 'The results', headerBackTitleVisible: false}}
         name="Picture"
         component={PictureScreen}
       />
