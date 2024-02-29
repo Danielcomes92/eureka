@@ -18,6 +18,8 @@ This project is a mobile application aimed at facilitating the process of taking
 
 The application leverages technologies such as React Native for cross-platform development, React Navigation for navigation management, React Native Vision Camera for camera integration, AsyncStorage for local data storage. The project aims to provide a user-friendly experience for managing pictures efficiently on mobile devices.
 
+The use of TypeScript ensures type safety throughout the development process, while Zustand provides a simple and efficient state management solution.
+
 ---
 
 ### Features
@@ -30,16 +32,19 @@ The application leverages technologies such as React Native for cross-platform d
 6. Permissions Management: Guides users to manage app permissions, such as camera and location access, for seamless functionality.
 7. Splash Screen: Displays a splash screen upon app launch for branding and loading indication.
 8. Navigation: Implements navigation using React Navigation to ensure smooth transitions between screens.
+9. Zustand: Implements state management to keep data through all the app flow
 
 ---
 
 ### Technologies
 
 - React Native
+- TypeScript
 - React Navigation
 - React Native Vision Camera
 - React Native Camera Roll
 - AsyncStorage
+- Zustand
 
 ---
 
