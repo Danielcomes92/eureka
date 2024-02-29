@@ -1,79 +1,74 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+### PiktApp - Eurekalabs challenge - Developed by Daniel Comes
 
-# Getting Started
+---
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+### Table of Contents
 
-## Step 1: Start the Metro Server
+1. [Description](#description)
+2. [Features](#features)
+3. [Technologies](#technologies)
+4. [Installation](#installation)
+5. [Usage](#usage)
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+---
 
-To start Metro, run the following command from the _root_ of your React Native project:
+### Description
 
-```bash
-# using npm
-npm start
+This project is a mobile application aimed at facilitating the process of taking pictures and managing them. It allows users to take pictures using their device's camera, save them to a designated album, and view them in a gallery-like interface. Additionally, users can delete saved pictures, view picture details such as location metadata, and configure app permissions.
 
-# OR using Yarn
-yarn start
-```
+The application leverages technologies such as React Native for cross-platform development, React Navigation for navigation management, React Native Vision Camera for camera integration, AsyncStorage for local data storage. The project aims to provide a user-friendly experience for managing pictures efficiently on mobile devices.
 
-## Step 2: Start your Application
+---
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+### Features
 
-### For Android
+1. Camera Integration: Utilizes React Native Vision Camera to enable users to take pictures using their device's camera.
+2. Picture Saving: Allows users to save taken pictures to a designated album on their device.
+3. Gallery View: Displays saved pictures in a gallery-like interface for easy browsing.
+4. Picture Details: Provides users with the ability to view picture details, including location metadata.
+5. Picture Deletion: Enables users to delete saved pictures directly from the application.
+6. Permissions Management: Guides users to manage app permissions, such as camera and location access, for seamless functionality.
+7. Splash Screen: Displays a splash screen upon app launch for branding and loading indication.
+8. Navigation: Implements navigation using React Navigation to ensure smooth transitions between screens.
 
-```bash
-# using npm
-npm run android
+---
 
-# OR using Yarn
-yarn android
-```
+### Technologies
 
-### For iOS
+- React Native
+- React Navigation
+- React Native Vision Camera
+- React Native Camera Roll
+- AsyncStorage
 
-```bash
-# using npm
-npm run ios
+---
 
-# OR using Yarn
-yarn ios
-```
+### Installation
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+1. Clone the repository:
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+2. Navigate to the project directory:
 
-## Step 3: Modifying your App
+   ```bash
+   cd project_name
+   ```
 
-Now that you have successfully run the app, let's modify it.
+3. Install dependencies:
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+   ```bash
+   npm install
+   ```
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+---
 
-## Congratulations! :tada:
+### Usage
 
-You've successfully run and modified your React Native App. :partying_face:
+1. Start the development server:
 
-### Now what?
+   ```bash
+   npm start
+   ```
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+2. Please have in mind that for camera usage you need a physical device.
 
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+---
