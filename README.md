@@ -1,5 +1,24 @@
 ### PiktApp - Eurekalabs challenge - Developed by Daniel Comes
 
+### Demo's link
+https://drive.google.com/file/d/1wPoXCMYqS8xjuI9PTtIbGFuAYG5TdrRr/view
+
+What is showed in the demo
+1. App Loading: The application displays a loading screen upon startup to indicate that it is initializing.
+2. Home Page with No Images: If no images have been taken, the home page displays a message informing the user that there are currently no images saved.
+3. Button Message on Home Page: The button on the home page is labeled "Take a Picture", indicating to the user that they can start capturing images.
+4. Navigation to Camera Screen: Users can navigate from the home page to the camera screen to capture images by pressing a button.
+5. Camera Usage - Image Taken and Saved: After capturing an image using the camera, users have the option to save it by pressing the appropriate button.
+6. Camera Usage - Image Discarded: Users also have the option to discard the captured image and retake it if needed.
+7. Camera Usage - Image Taken and Saved: Users can capture and save multiple images using the camera functionality.
+8. Home Page CTA Button Message: Once at least one image has been saved, the button message on the home page changes to "Take More Pictures", indicating that the user can capture additional images.
+9. Navigation to Image Details: Users can navigate from the home page to view the details of a specific image.
+10. Image and Location Data Displayed: When viewing an image, users can see both the image itself and any associated location data.
+11. Same as 10
+12. Delete Image Functionality: Users can delete images directly from the application, removing them from the gallery.
+13. Same as 12
+14. Button Message on Home Page: If there are no images in the camera roll, the button on the home page returns to displaying "Take a Picture," prompting users to capture new images.
+
 ---
 
 ### Table of Contents
